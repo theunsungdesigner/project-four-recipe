@@ -1,14 +1,4 @@
-/* 
- * Place all functions, classes, and/or DB schemas here for a single 
- * model.
- */
 
-/* Step 1
- *
- * TODO: import mongoose connection
- * NOTE: skip this if you are not using mongoose
- *
- */
 const mongoose = require('./connection.js')
 
 /* Step 1 alternative
@@ -18,7 +8,7 @@ const mongoose = require('./connection.js')
  * your data once you stop running your server.
  *
  */
-global.notePadModel = [];
+global.NotePadModel = [];
 
 /* Step 2
  *
@@ -26,9 +16,10 @@ global.notePadModel = [];
  * NOTE: skip this if you are not using mongoose
  *
  */
-//const SampleModelSchema = new mongoose.Schema({
-//  name: String
-//})
+const NotePadModelSchema = new mongoose.Schema({
+ name: String,
+ recipeNotes: String
+})
 
 /* Step 3
  *
@@ -36,16 +27,44 @@ global.notePadModel = [];
  * NOTE: skip this if you are not using mongoose
  *
  */
-const notePadCollection = mongoose.model('notePad', NotePadModelSchema)
+const NotePadCollection = mongoose.model('notePad', NotePadModelSchema)
 
 /* Step 4
  *
  * TODO: delete this it's just a sample
  *
  */
-function getHelloWorldString() {
-  return 'hello world'
-}
+function getAllNotepad() {
+    return NotepadModel.find();
+  }
+  
+  /**
+  *  getNotepadById
+  * @param {string} NotepadId
+  */
+  function getNotepadById(NotepadId) {
+    return NotepadModel
+        .findById(NotepadId);
+  }
+  
+  /**
+  *
+  * @param {string} NotepadId
+  */
+  function deleteNotepadById(notepadId) {
+    return NotepadModel
+        .findOneAndDelete({_id: notepadId});
+  }
+  
+  function updateNotepadById(notepadId, notepadData) {
+    return NotepadModel
+        .findOneAndUpdate({_id: notepadId}, notepadData);
+  }
+  
+  function createNotepad(notepadData) {
+    return NotepadModel.create(notepadData);
+  }
+  
 
 /* Step 5
  *
@@ -53,5 +72,10 @@ function getHelloWorldString() {
  * object
  */
 module.exports = {
-  getHelloWorldString
+  getHelloWorldString,
+  createNotepad,
+  updateNotepadById,
+  deleteNotepadById,
+  getNotepadById,
+  getAllNotepad
 }
