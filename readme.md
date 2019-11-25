@@ -1,6 +1,14 @@
-# mern-template-project
+# React Recipe Application
+here's a link to the project
+https://trello.com/b/14bK6CaX/project-four-recipe-react
 
-# Setup A New Project From This Template
+
+here's a link to the wireframe for UI
+
+
+here's a link to the ERD
+
+
 
 If you are starting a new project do the following:
 
