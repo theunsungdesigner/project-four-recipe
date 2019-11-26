@@ -24,7 +24,7 @@ This is the initial ERD mock-up for structure
 
 This is the conceptual UI flow for the full application
  ================================================================================
- <img src="https://github.com/theunsungdesigner/project-four-recipe/blob/master/images/User%20Flow%20React%20Recipe.pdf" width="350" />
+ <img src="https://github.com/theunsungdesigner/project-four-recipe/blob/master/images/User%20Flow%20React%20Recipe.png" width="350" />
 
  This is the conceptual design for the full application
  ================================================================================
