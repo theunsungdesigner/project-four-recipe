@@ -17,7 +17,7 @@ const app = express()
  *
  */
 const { notepadRouter } = require('./controllers/notepad.js')
-
+const { singleRecipeRouter } = require('./controllers/singleRecipe.js')
 
 /* Step 3
  *
@@ -49,7 +49,8 @@ app.use(express.static(`${__dirname}/client/build`))
  * add router for the application to use. The first argument is a prefix to all
  * the paths defined in the router.
  */
-app.use('/api/helloworld', notepadRouter)
+app.use('/api/notepad', notepadRouter)
+app.use('/api/singleRecipe', singleRecipeRouter)
 
 /* Step 5
  *

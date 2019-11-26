@@ -34,8 +34,8 @@ const NotePadCollection = mongoose.model('notePad', NotePadModelSchema)
  * TODO: delete this it's just a sample
  *
  */
-function getAllNotepad() {
-    return NotepadModel.find();
+function getAllNotepads() {
+    return NotePadCollection.find();
   }
   
   /**
@@ -43,7 +43,7 @@ function getAllNotepad() {
   * @param {string} NotepadId
   */
   function getNotepadById(NotepadId) {
-    return NotepadModel
+    return NotePadCollection
         .findById(NotepadId);
   }
   
@@ -52,17 +52,17 @@ function getAllNotepad() {
   * @param {string} NotepadId
   */
   function deleteNotepadById(notepadId) {
-    return NotepadModel
+    return NotePadCollection
         .findOneAndDelete({_id: notepadId});
   }
   
   function updateNotepadById(notepadId, notepadData) {
-    return NotepadModel
+    return NotePadCollection
         .findOneAndUpdate({_id: notepadId}, notepadData);
   }
   
   function createNotepad(notepadData) {
-    return NotepadModel.create(notepadData);
+    return NotePadCollection.create(notepadData);
   }
   
 
@@ -72,9 +72,9 @@ function getAllNotepad() {
  * object
  */
 module.exports = {
-  getHelloWorldString,
   createNotepad,
   updateNotepadById,
   deleteNotepadById,
   getNotepadById,
+  getAllNotepads,
 }

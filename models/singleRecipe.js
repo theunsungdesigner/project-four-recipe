@@ -1,8 +1,8 @@
-const mongoose = require('./connection.js')
+const mongoose = require("./connection.js");
 
 /* Step 1 alternative
  *
- * TODO: make a global variable to act as an in memory database. 
+ * TODO: make a global variable to act as an in memory database.
  * NOTE: doing this WILL NOT persist your data and you will loose
  * your data once you stop running your server.
  *
@@ -11,16 +11,16 @@ global.SingleRecipeModel = [];
 
 /* Step 2
  *
- * TODO: create model schema 
+ * TODO: create model schema
  * NOTE: skip this if you are not using mongoose
  *
  */
 const SingleRecipeModelSchema = new mongoose.Schema({
- title: String,
- href: String,
- ingredients: String,
- url: String
-})
+  title: String,
+  href: String,
+  ingredients: String,
+  url: String
+});
 
 /* Step 3
  *
@@ -28,44 +28,46 @@ const SingleRecipeModelSchema = new mongoose.Schema({
  * NOTE: skip this if you are not using mongoose
  *
  */
-const SingleRecipeCollection = mongoose.model('singleRecipe', SingleRecipeModelSchema)
+const SingleRecipeCollection = mongoose.model(
+  "singleRecipe",
+  SingleRecipeModelSchema
+);
 
 /* Step 4
  *
  * TODO: delete this it's just a sample
  *
  */
-function getAllSingleRecipe() {
-    return SingleRecipeModel.find();
-  }
-  
-  /**
-  *  getSingleRecipeById
-  * @param {string} SingleRecipeId
-  */
-  function getSingleRecipeById(SingleRecipeId) {
-    return SingleRecipeModel
-        .findById(SingleRecipeId);
-  }
-  
-  /**
-  *
-  * @param {string} SingleRecipeId
-  */
-  function deleteSingleRecipeById(singlerecipeId) {
-    return SingleRecipeModel
-        .findOneAndDelete({_id: singlerecipeId});
-  }
-  
-  function updateSingleRecipeById(singlerecipeId, singlerecipeData) {
-    return SingleRecipeModel
-        .findOneAndUpdate({_id: singlerecipeId}, singlerecipeData);
-  }
-  
-  function createSingleRecipe(singlerecipeData) {
-    return SingleRecipeModel.create(singlerecipeData);
-  }
-  
+function getAllSingleRecipes() {
+  return SingleRecipeCollection.find();
+}
+
+/**
+ *  getSingleRecipeById
+ * @param {string} SingleRecipeId
+ */
+function getSingleRecipeById(SingleRecipeId) {
+  return SingleRecipeCollection.findById(SingleRecipeId);
+}
+
+/**
+ *
+ * @param {string} SingleRecipeId
+ */
+function deleteSingleRecipeById(singleRecipeId) {
+  return SingleRecipeCollection.findOneAndDelete({ _id: singleRecipeId });
+}
+
+function updateSingleRecipeById(singleRecipeId, singleRecipeData) {
+  return SingleRecipeCollection.findOneAndUpdate(
+    { _id: singleRecipeId },
+    singleRecipeData
+  );
+}
+
+function createSingleRecipe(singleRecipeData) {
+  return SingleRecipeCollection.create(singleRecipeData);
+}
 
 /* Step 5
  *
@@ -73,9 +75,9 @@ function getAllSingleRecipe() {
  * object
  */
 module.exports = {
-  getHelloWorldString,
+  getAllSingleRecipes,
   createSingleRecipe,
   updateSingleRecipeById,
   deleteSingleRecipeById,
-  getSingleRecipeById,
-}
+  getSingleRecipeById
+};

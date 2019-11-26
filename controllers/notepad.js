@@ -17,7 +17,7 @@ function getNotepadId(req, res) {
 }
 notepadRouter.get("/", async (req, res) => {
   try {
-    const retrievedNotepad = await notepadApi.getAllNotepad();
+    const retrievedNotepad = await notepadApi.getAllNotepads();
     console.log(retrievedNotepad);
     res.status(200).json(retrievedNotepad);
     return;
@@ -94,4 +94,5 @@ notepadRouter.delete("/:notepadId", async (req, res) => {
 
 module.exports = {
   notepadRouter
+  
 };
