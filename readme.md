@@ -19,8 +19,6 @@ The purpose of this application is to create a platform where the user is able t
 **Text** Full C.R.D. application with the goal of being a platform used across the world to empower local cooks to make great meals that anyone can follow along with
 
 ## Wireframes and ERD ##
-This is the initial ERD mock-up for structure
-<img src="https://github.com/theunsungdesigner/project-3-community-u/blob/master/images/community%20u%20ver%202.png?raw=true" width="350" />
 
 This is the conceptual UI flow for the full application
  ================================================================================
