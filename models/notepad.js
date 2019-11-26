@@ -77,5 +77,4 @@ module.exports = {
   updateNotepadById,
   deleteNotepadById,
   getNotepadById,
-  getAllNotepad
 }
