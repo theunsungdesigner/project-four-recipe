@@ -7,7 +7,7 @@ const mongoose = require("./connection.js");
  * your data once you stop running your server.
  *
  */
-global.SingleRecipeModel = [];
+
 
 /* Step 2
  *

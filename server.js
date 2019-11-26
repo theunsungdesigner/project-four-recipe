@@ -18,6 +18,7 @@ const app = express()
  */
 const { notepadRouter } = require('./controllers/notepad.js')
 const { singleRecipeRouter } = require('./controllers/singleRecipe.js')
+const { imageRouter } = require('./controllers/image.js')
 
 /* Step 3
  *
@@ -51,6 +52,7 @@ app.use(express.static(`${__dirname}/client/build`))
  */
 app.use('/api/notepad', notepadRouter)
 app.use('/api/singleRecipe', singleRecipeRouter)
+app.use('/api/image', imageRouter)
 
 /* Step 5
  *
