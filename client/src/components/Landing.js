@@ -12,7 +12,6 @@ export default class Landing extends Component {
 
   fetchApi = (e)=>{
     e.preventDefault()
-    console.log(API_KEY)
     axios({
       "method":"GET",
       "url":"https://recipe-puppy.p.rapidapi.com/",
@@ -63,10 +62,20 @@ export default class Landing extends Component {
               type="text"
               name="input"
               placeholder="search"
-              value={this.state.name}
+              value={this.state.input}
               onChange={this.handleChange}
             />
           </form>
+
+        </div>
+        <div className="carousel">
+        {this.state.recipeList.map(e => {
+          return (
+            <div key={e.id}>
+              <Link to={`/react-recipe/${e._id}`}>{e.title}</Link>
+            </div>
+          );
+        })}
         </div>
       </div>
     );

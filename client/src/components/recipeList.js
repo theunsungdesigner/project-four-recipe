@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class recipeList extends Component {
+export default class RecipeList extends Component {
     state = {
         
     }
