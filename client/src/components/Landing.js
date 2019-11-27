@@ -7,35 +7,44 @@ export default class Landing extends Component {
     input: " ",
     ingredients: " ",
     recipeList: [],
-    notepad: []
+    notepad: [],
+    recipeIndex: {
+      title: "",
+      ingredients:"",
+
+    }
   };
 
-  fetchApi = (e)=>{
+  fetchApi = (e) => {
     e.preventDefault()
     axios({
-      "method":"GET",
-      "url":"https://recipe-puppy.p.rapidapi.com/",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"recipe-puppy.p.rapidapi.com",
-      "x-rapidapi-key": `${API_KEY}`
-      },"params":{
-      "p":"1",
-      "i": `${this.state.ingredients}`,
-      "q":`${this.state.input}`
+      "method": "GET",
+      "url": "https://recipe-puppy.p.rapidapi.com/",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
+        "x-rapidapi-key": `${API_KEY}`
+      }, "params": {
+        "p": "1",
+        "i": `${this.state.ingredients}`,
+        "q": `${this.state.input}`
       }
-      })
-      .then((response)=>{
+    })
+      .then((response) => {
         console.log(response.data)
-        this.setState({recipeList: response.data.results})
+        this.setState({ recipeList: response.data.results })
       })
-      .catch((error)=>{
+      .catch((error) => {
         console.log(error)
       })
   }
-// easy way to set state on input target event, definitely adding to our codesnippets
-  handleChange =(e)=>{
-    this.setState({input : e.target.value}) 
+  // easy way to set state on input target event, definitely adding to our codesnippets
+  handleChange = (e) => {
+    this.setState({ input: e.target.value })
+  }
+
+  bttnClick= (e) =>{
+     this.setState({recipeIndex: e})
   }
 
   componentDidMount() {
@@ -69,13 +78,23 @@ export default class Landing extends Component {
 
         </div>
         <div className="carousel">
-        {this.state.recipeList.map(e => {
-          return (
-            <div key={e.id}>
-              <Link to={`/react-recipe/${e._id}`}>{e.title}</Link>
-            </div>
-          );
-        })}
+          {this.state.recipeList.map((recipe, index) => {
+            return (
+
+              // <div>{e.title}</div>
+              // <div key = {e.id}>
+              //   {this.state.recipeList[].name}
+              // </div>
+              <div key={recipe.id} onClick={() => {
+                this.bttnClick(recipe)
+              }}
+              >
+                <h3>{recipe.title}</h3>
+                {/* {console.log(e)} */}
+                {/* {this.setState( {recipeIndex : e})} */}
+              </div>
+            );
+          })}
         </div>
       </div>
     );
