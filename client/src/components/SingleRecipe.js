@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import Landing from ('./Component/Landing')
 export default class SingleRecipe extends Component {
   state = {
     title: String,

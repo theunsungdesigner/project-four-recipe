@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
-const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a"
+import Notepad from "./Notepad";
+const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a";
 export default class Landing extends Component {
   state = {
     input: " ",
@@ -10,42 +11,42 @@ export default class Landing extends Component {
     notepad: [],
     recipeIndex: {
       title: "",
-      ingredients:"",
-
+      ingredients: ""
     }
   };
 
-  fetchApi = (e) => {
-    e.preventDefault()
+  fetchApi = e => {
+    e.preventDefault();
     axios({
-      "method": "GET",
-      "url": "https://recipe-puppy.p.rapidapi.com/",
-      "headers": {
+      method: "GET",
+      url: "https://recipe-puppy.p.rapidapi.com/",
+      headers: {
         "content-type": "application/octet-stream",
         "x-rapidapi-host": "recipe-puppy.p.rapidapi.com",
         "x-rapidapi-key": `${API_KEY}`
-      }, "params": {
-        "p": "1",
-        "i": `${this.state.ingredients}`,
-        "q": `${this.state.input}`
+      },
+      params: {
+        p: "1",
+        i: `${this.state.ingredients}`,
+        q: `${this.state.input}`
       }
     })
-      .then((response) => {
-        console.log(response.data)
-        this.setState({ recipeList: response.data.results })
+      .then(response => {
+        console.log(response.data);
+        this.setState({ recipeList: response.data.results });
       })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  };
   // easy way to set state on input target event, definitely adding to our codesnippets
-  handleChange = (e) => {
-    this.setState({ input: e.target.value })
-  }
+  handleChange = e => {
+    this.setState({ input: e.target.value });
+  };
 
-  bttnClick= (e) =>{
-     this.setState({recipeIndex: e})
-  }
+  bttnClick = e => {
+    this.setState({ recipeIndex: e });
+  };
 
   componentDidMount() {
     // axios.get("/api/singleRecipe").then(res => {
@@ -65,6 +66,7 @@ export default class Landing extends Component {
   render() {
     return (
       <div>
+        <Notepad />
         <div>
           <form onSubmit={this.fetchApi}>
             <input
@@ -75,23 +77,19 @@ export default class Landing extends Component {
               onChange={this.handleChange}
             />
           </form>
-
         </div>
         <div className="carousel">
           {this.state.recipeList.map((recipe, index) => {
             return (
-
-              // <div>{e.title}</div>
-              // <div key = {e.id}>
-              //   {this.state.recipeList[].name}
-              // </div>
-              <div key={recipe.id} onClick={() => {
-                this.bttnClick(recipe)
-              }}
+              <div
+                key={recipe.id}
+                onClick={() => {
+                  this.bttnClick(recipe);
+                }}
               >
                 <h3>{recipe.title}</h3>
-                {/* {console.log(e)} */}
-                {/* {this.setState( {recipeIndex : e})} */}
+
+                <button className="notepad">this-is-notepad</button>
               </div>
             );
           })}

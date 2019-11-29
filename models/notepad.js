@@ -17,7 +17,7 @@ global.NotePadModel = [];
  *
  */
 const NotePadModelSchema = new mongoose.Schema({
- name: String,
+ recipeName: String,
  recipeNotes: String
 })
 

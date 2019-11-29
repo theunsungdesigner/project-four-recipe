@@ -9,6 +9,7 @@
     "mongoose": "^5.7.12",
     "node": "^13.1.0"
   },
+  "proxy": "http://localhost:3001",
   "engines": {
     "node": "10.x"
   },
