@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import Notepad from "./Notepad";
+import Modal from '@material-ui/core/Modal';
+import SingleRecipe from './SingleRecipe';
 const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a";
+
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 export default class Landing extends Component {
@@ -11,6 +14,7 @@ export default class Landing extends Component {
     ingredients: " ",
     recipeList: [],
     notepad: [],
+    isModalOpen: false,
     selectedRecipe: {
       title: "",
       ingredients: ""
@@ -44,15 +48,35 @@ export default class Landing extends Component {
   handleChange = e => {
     this.setState({ input: e.target.value });
   };
+   handleOpen = () => {
+    this.setState({isModalOpen: true})
+  };
 
+   handleClose = () => {
+   this.setState({isModalOpen: false})
+  };
+
+  renderModal =()=>{
+    const modalHtml = <Modal
+    aria-labelledby="simple-modal-title"
+    aria-describedby="simple-modal-description"
+    open={this.state.isModalOpen}
+    onClose={this.handleClose}
+  >
+    <div style={{ background : 'white'}}>
+      <SingleRecipe selectedRecipe={this.state.selectedRecipe} />
+    </div>
+  </Modal>
+    return modalHtml
+  }
   saveRecipe =(e)=>{
     const id = e.target.getAttribute('data-index');
     const selected = this.state.recipeList.find((recipe, index) => {
       if (index === parseInt(id)) {
-        this.state.recipeList[index].saved = true
+        this.state.recipeList[index].saved = !this.state.recipeList[index].saved
         return recipe;
       }
-    } );
+    });
     console.groupCollapsed('saved')
     console.log(id)
     console.log(selected)
@@ -60,8 +84,17 @@ export default class Landing extends Component {
   };
 
   selectRecipe = e => {
-    this.setState({ selectedRecipe: e });
+    const id = e.target.getAttribute('data-index');
+    this.state.recipeList.find((recipe, index) => {
+      if (index === parseInt(id)) {
+        console.log(recipe)
+        this.setState({ selectedRecipe: recipe });
+      }
+    });
+
+    this.handleOpen()
   };
+
 
   componentDidMount() {
     // axios.get("/api/singleRecipe").then(res => {
@@ -98,9 +131,8 @@ export default class Landing extends Component {
             return (
               <div
                 key={index}
-                onClick={this.selectRecipe}
               >
-                <h3>{recipe.title}</h3>
+                <h3 onClick={this.selectRecipe} data-index={index}>{recipe.title}</h3>
 
           <button className="saveRecipe" data-index={index} onClick={this.saveRecipe}> 
             {recipe.saved == true ? 'remove': 'save'} recipe</button>
@@ -108,6 +140,7 @@ export default class Landing extends Component {
             );
           })}
         </div>
+        {this.renderModal()}
       </div>
     );
   }
