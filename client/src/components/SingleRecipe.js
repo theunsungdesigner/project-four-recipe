@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Landing from ('./Component/Landing')
 export default class SingleRecipe extends Component {
   state = {
+    saved: Boolean,
     title: String,
     href: String,
     ingredients: String,

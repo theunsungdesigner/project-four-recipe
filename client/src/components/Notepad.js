@@ -20,6 +20,7 @@ export default class Notepad extends Component {
   componentDidMount() {
     axios.get("/api/notepad").then(res => {
       console.log(res.data);
+      
       // this.setState({
       //   recipeName: res.data,
       //   recipeNotes: res.data,

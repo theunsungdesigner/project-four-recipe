@@ -4,10 +4,13 @@
   "description": "# Setup",
   "main": "server.js",
   "dependencies": {
+    "@material-ui/core": "^4.7.1",
     "concurrently": "^4.1.1",
     "express": "^4.17.1",
     "mongoose": "^5.7.12",
-    "node": "^13.1.0"
+    "node": "^13.1.0",
+    "react-slick": "^0.25.2",
+    "typeface-roboto": "0.0.75"
   },
   "proxy": "http://localhost:3001",
   "engines": {

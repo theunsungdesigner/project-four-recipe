@@ -3,18 +3,19 @@ import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import Notepad from "./Notepad";
 const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 export default class Landing extends Component {
   state = {
     input: " ",
     ingredients: " ",
     recipeList: [],
     notepad: [],
-    recipeIndex: {
+    selectedRecipe: {
       title: "",
       ingredients: ""
     }
   };
-
   fetchApi = e => {
     e.preventDefault();
     axios({
@@ -44,8 +45,22 @@ export default class Landing extends Component {
     this.setState({ input: e.target.value });
   };
 
-  bttnClick = e => {
-    this.setState({ recipeIndex: e });
+  saveRecipe =(e)=>{
+    const id = e.target.getAttribute('data-index');
+    const selected = this.state.recipeList.find((recipe, index) => {
+      if (index === parseInt(id)) {
+        this.state.recipeList[index].saved = true
+        return recipe;
+      }
+    } );
+    console.groupCollapsed('saved')
+    console.log(id)
+    console.log(selected)
+    console.groupEnd()
+  };
+
+  selectRecipe = e => {
+    this.setState({ selectedRecipe: e });
   };
 
   componentDidMount() {
@@ -82,14 +97,13 @@ export default class Landing extends Component {
           {this.state.recipeList.map((recipe, index) => {
             return (
               <div
-                key={recipe.id}
-                onClick={() => {
-                  this.bttnClick(recipe);
-                }}
+                key={index}
+                onClick={this.selectRecipe}
               >
                 <h3>{recipe.title}</h3>
 
-                <button className="notepad">this-is-notepad</button>
+          <button className="saveRecipe" data-index={index} onClick={this.saveRecipe}> 
+            {recipe.saved == true ? 'remove': 'save'} recipe</button>
               </div>
             );
           })}
