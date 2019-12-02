@@ -55,7 +55,14 @@ export default class Landing extends Component {
     this.setState({ isModalOpen: false });
   };
 
+  databasePost =(e)=>{
+    // e.preventDefault()
+    axios.post('api/singleRecipe',this.state.selectedRecipe) 
+   .then(res =>{ console.log(res.data)})
+  }
+
   renderModal = () => {
+
     const modalHtml = (
       <Modal
         aria-labelledby="simple-modal-title"
@@ -64,11 +71,15 @@ export default class Landing extends Component {
         onClose={this.handleClose}
       >
         <div style={{ background: "white" }}>
-          <SingleRecipe selectedRecipe={this.state.selectedRecipe} />
+          <SingleRecipe databasePost={this.databasePost} 
+          selectedRecipe={this.state.selectedRecipe} />
         </div>
+       
       </Modal>
+      
     );
     return modalHtml;
+    
   };
   saveRecipe = e => {
     const id = e.target.getAttribute("data-index");
@@ -95,6 +106,7 @@ export default class Landing extends Component {
     });
 
     this.handleOpen();
+
   };
 
   componentDidMount() {
@@ -150,6 +162,7 @@ export default class Landing extends Component {
                   onClick={this.saveRecipe}
                 >
                   {recipe.saved == true ? "remove" : "save"} recipe
+                  {/* axios call here to select saved recipe to post notepadID and imageID */}
                 </button>
               </div>
             );

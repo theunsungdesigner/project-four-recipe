@@ -12,9 +12,16 @@ export default class Image extends Component {
    }
     handleInputChange = e => {
         const newUrl = { ...this.state.url };
-        newUrl[e.target.url] = e.target.value;
-        this.setState({url: ''});
+        newUrl[e.target.name] = e.target.value;
+        this.setState({newUrl: newUrl});
       };
+    
+    componentDidMount() {
+        axios.get("/api/image").then(res => {
+        console.log(res.data);
+    })
+}
+
       bttnClick = (e) => {
         e.preventDefault()
         const { newUrl } = this.state
