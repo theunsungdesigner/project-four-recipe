@@ -55,7 +55,7 @@ export default class Notepad extends Component {
   render() {
     return (
       
-      <div className=".input-field , valign-wrapper">
+      <div className="input-field">
 
         <form onSubmit={this.bttnClick}>
           <input className = "notepad-input"
@@ -66,7 +66,7 @@ export default class Notepad extends Component {
             value={this.state.recipeName}
             onChange={this.handleInputChange}
           />
-          <input className ="left,notepad-input"
+          <input className ="notepad-input"
             type="text"
             name="recipeNotes"
             maxLength="250"
@@ -75,14 +75,7 @@ export default class Notepad extends Component {
             onChange={this.handleInputChange}
           />
 
-          <input className = "notepad-input"
-            type="text"
-            name="url"
-            maxLength="40"
-            placeholder=" url"
-            value={this.state.url}
-            onChange={this.handleInputChange}
-          />
+          
           
 
           {/* <div key={notepadList.id} onClick={() => {
@@ -93,7 +86,7 @@ export default class Notepad extends Component {
                 <h3>{notepadList.name}</h3>
 
               </div> */}
-          <button>Submit</button>
+          <button type="primary" onChange={this.handleInputChange}>Submit</button>
         </form>
 
 

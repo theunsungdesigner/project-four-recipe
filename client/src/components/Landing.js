@@ -5,6 +5,7 @@ import Notepad from "./Notepad";
 import Image from "./Image"
 import SingleRecipe from "./SingleRecipe";
 import Modal from "@material-ui/core/Modal";
+import * as M from 'materialize-css';
 const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a";
 
 export default class Landing extends Component {
@@ -43,6 +44,7 @@ export default class Landing extends Component {
         console.log(error);
       });
   };
+   
   // easy way to set state on input target event, definitely adding to our codesnippets
   handleChange = e => {
     this.setState({ input: e.target.value });
@@ -58,7 +60,14 @@ export default class Landing extends Component {
   databasePost =(e)=>{
     // e.preventDefault()
     axios.post('api/singleRecipe',this.state.selectedRecipe) 
-   .then(res =>{ console.log(res.data)})
+   .then(res =>{ 
+     // toast success with name
+     M.toast({html: 'I am a toast!'})
+   })
+   .catch(err => { 
+     // toast err
+     M.toast({html: 'there was an error!'})
+   })
   }
 
   renderModal = () => {
@@ -131,7 +140,7 @@ export default class Landing extends Component {
           <div>
             <h1> REACT RECIPES </h1>
           </div>
-        
+          <button onClick={this.fetchApi}>Submit Search</button>
        
         <div>
           <form onSubmit={this.fetchApi}>

@@ -1,52 +1,65 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class Image extends Component {
-   state = {
-    newUrl: {
-    url: '',
-    imageId: '',
-    recipeId: '',
+  state = {
+    imageUrl: "",
+    file: {
+      url: "",
+        type: "",
+      recipeId: ""
     }
+  };
+  handleInputChange = e => {
+    this.setState({ imageUrl: e.target.value });
+  };
 
-   }
-    handleInputChange = e => {
-        const newUrl = { ...this.state.url };
-        newUrl[e.target.name] = e.target.value;
-        this.setState({newUrl: newUrl});
-      };
-    
-    componentDidMount() {
-        axios.get("/api/image").then(res => {
+  componentDidMount() {
+    axios.get("/api/image").then(res => {
+      console.log(res.data);
+    });
+  }
+
+  bttnClick = e => {
+    e.preventDefault();
+    const { newUrl } = this.state;
+    axios
+      .post("/api/image", {
+        url: this.state.imageUrl
+      })
+      .then(res => {
+        this.setState({
+          file: {
+            url: " "
+          }
+        });
         console.log(res.data);
-    })
-}
+      });
+  };
 
-      bttnClick = (e) => {
-        e.preventDefault()
-        const { newUrl } = this.state
-        axios.post('/api/notepad', {
-          url: this.state.newUrl.url
-        }).then(res => {
-          
-          this.setState({
-            newNotes: {
-              recipeName: '',
-              recipeNotes: '',
-              url: ''
-            }
-          })
-          console.log(res.data)
-        })
+  render() {
+    return (
+      <div>
+        <label>image</label>
+        <input
+          className="notepad-input"
+          type="file"
+          name="url2"
+          placeholder=" upload image"
+          value=""
+          onChange={this.handleInputChange}
+        />
         
-      }
-  
-    render() {
-        return (
-            <div>
-
-            
-            </div>
-        )
-    }
+        <input
+          className="notepad-input"
+          type="text"
+          name="url"
+          placeholder="image url"
+          value={this.state.imageUrl}
+          onChange={this.handleInputChange}
+        />
+        <button onClick={this.bttnClick}>upload</button>
+      </div>
+    );
+  }
 }

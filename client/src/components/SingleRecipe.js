@@ -10,7 +10,7 @@ export default class SingleRecipe extends Component {
         <h5>{this.props.selectedRecipe.href}</h5>
         <h5>{this.props.selectedRecipe.ingredients}</h5>
         <h5><a href={this.props.selectedRecipe.href} target="_blank" >Visit website</a></h5>
-        <button  onClick = {this.props.databasePost}>submit</button>
+        <button  onClick={this.props.databasePost}>submit</button>
     
       </div>
     );
