@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect, Link } from "react-router-dom";
 import Notepad from "./Notepad";
-import Modal from '@material-ui/core/Modal';
-import SingleRecipe from './SingleRecipe';
+import Image from "./Image"
+import SingleRecipe from "./SingleRecipe";
+import Modal from "@material-ui/core/Modal";
 const API_KEY = "606eea9a4cmsh0af525fb3527557p1737cdjsne2c82d71eb0a";
 
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 export default class Landing extends Component {
   state = {
     input: " ",
@@ -48,53 +47,55 @@ export default class Landing extends Component {
   handleChange = e => {
     this.setState({ input: e.target.value });
   };
-   handleOpen = () => {
-    this.setState({isModalOpen: true})
+  handleOpen = () => {
+    this.setState({ isModalOpen: true });
   };
 
-   handleClose = () => {
-   this.setState({isModalOpen: false})
+  handleClose = () => {
+    this.setState({ isModalOpen: false });
   };
 
-  renderModal =()=>{
-    const modalHtml = <Modal
-    aria-labelledby="simple-modal-title"
-    aria-describedby="simple-modal-description"
-    open={this.state.isModalOpen}
-    onClose={this.handleClose}
-  >
-    <div style={{ background : 'white'}}>
-      <SingleRecipe selectedRecipe={this.state.selectedRecipe} />
-    </div>
-  </Modal>
-    return modalHtml
-  }
-  saveRecipe =(e)=>{
-    const id = e.target.getAttribute('data-index');
+  renderModal = () => {
+    const modalHtml = (
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={this.state.isModalOpen}
+        onClose={this.handleClose}
+      >
+        <div style={{ background: "white" }}>
+          <SingleRecipe selectedRecipe={this.state.selectedRecipe} />
+        </div>
+      </Modal>
+    );
+    return modalHtml;
+  };
+  saveRecipe = e => {
+    const id = e.target.getAttribute("data-index");
     const selected = this.state.recipeList.find((recipe, index) => {
       if (index === parseInt(id)) {
-        this.state.recipeList[index].saved = !this.state.recipeList[index].saved
+        this.state.recipeList[index].saved = !this.state.recipeList[index]
+          .saved;
         return recipe;
       }
     });
-    console.groupCollapsed('saved')
-    console.log(id)
-    console.log(selected)
-    console.groupEnd()
+    console.groupCollapsed("saved");
+    console.log(id);
+    console.log(selected);
+    console.groupEnd();
   };
 
   selectRecipe = e => {
-    const id = e.target.getAttribute('data-index');
+    const id = e.target.getAttribute("data-index");
     this.state.recipeList.find((recipe, index) => {
       if (index === parseInt(id)) {
-        console.log(recipe)
+        console.log(recipe);
         this.setState({ selectedRecipe: recipe });
       }
     });
 
-    this.handleOpen()
+    this.handleOpen();
   };
-
 
   componentDidMount() {
     // axios.get("/api/singleRecipe").then(res => {
@@ -114,28 +115,42 @@ export default class Landing extends Component {
   render() {
     return (
       <div>
-        <Notepad />
+        
+          <div>
+            <h1> REACT RECIPES </h1>
+          </div>
+        
+       
         <div>
           <form onSubmit={this.fetchApi}>
             <input
               type="text"
               name="input"
-              placeholder="search"
+              placeholder="search here"
               value={this.state.input}
               onChange={this.handleChange}
             />
           </form>
         </div>
+
+        <Notepad />
+        <Image />
+
         <div className="carousel">
           {this.state.recipeList.map((recipe, index) => {
             return (
-              <div
-                key={index}
-              >
-                <h3 onClick={this.selectRecipe} data-index={index}>{recipe.title}</h3>
+              <div key={index}>
+                <h4 onClick={this.selectRecipe} data-index={index}>
+                  {recipe.title}
+                </h4>
 
-          <button className="saveRecipe" data-index={index} onClick={this.saveRecipe}> 
-            {recipe.saved == true ? 'remove': 'save'} recipe</button>
+                <button
+                  className="saveRecipe"
+                  data-index={index}
+                  onClick={this.saveRecipe}
+                >
+                  {recipe.saved == true ? "remove" : "save"} recipe
+                </button>
               </div>
             );
           })}

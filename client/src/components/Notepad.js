@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 
+
 export default class Notepad extends Component {
   state = {
     notes: [],
     newNotes: {
       recipeName: '',
-      recipeNotes: ''
-      
+      recipeNotes: '',
+      url: '',
+      imageId: '',
+      recipeId: ''
+
     }
   }
 
@@ -20,7 +24,7 @@ export default class Notepad extends Component {
   componentDidMount() {
     axios.get("/api/notepad").then(res => {
       console.log(res.data);
-      
+
       // this.setState({
       //   recipeName: res.data,
       //   recipeNotes: res.data,
@@ -35,20 +39,24 @@ export default class Notepad extends Component {
     axios.post('/api/notepad', {
       recipeName: newNotes.recipeName,
       recipeNotes: newNotes.recipeNotes
-    }).then(res =>{
+    }).then(res => {
       console.log(res)
-      this.setState({ newNotes: {
-        recipeName: '',
-        recipeNotes: ''
-      }})
+      this.setState({
+        newNotes: {
+          recipeName: '',
+          recipeNotes: ''
+        }
+      })
     })
 
   }
   render() {
     return (
-      <div className="carousel">
+      
+      <div className=".input-field , valign-wrapper">
+
         <form onSubmit={this.bttnClick}>
-          <input
+          <input className = "notepad-input"
             type="text"
             name="recipeName"
             maxLength="40"
@@ -56,7 +64,7 @@ export default class Notepad extends Component {
             value={this.state.recipeName}
             onChange={this.handleInputChange}
           />
-          <input
+          <input className ="left,notepad-input"
             type="text"
             name="recipeNotes"
             maxLength="250"
@@ -64,7 +72,17 @@ export default class Notepad extends Component {
             value={this.state.recipeNotes}
             onChange={this.handleInputChange}
           />
+
+          <input className = "notepad-input"
+            type="text"
+            name="url"
+            maxLength="40"
+            placeholder=" url"
+            value={this.state.url}
+            onChange={this.handleInputChange}
+          />
           
+
           {/* <div key={notepadList.id} onClick={() => {
                 this.bttnClick(notepadList)
               }}
@@ -73,13 +91,13 @@ export default class Notepad extends Component {
                 <h3>{notepadList.name}</h3>
 
               </div> */}
-            <button>Submit</button>
+          <button>Submit</button>
         </form>
 
 
 
-        
-        </div>
+
+      </div>
 
 
     )
