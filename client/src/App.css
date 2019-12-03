@@ -29,10 +29,11 @@
 .card {
   min-height: 180px;
     padding-top: 10px;
+    background-color: gainsboro;
 }
 
 button {
-  background: #21d7e7;
+  background: #00a5b4;
   color: white;
   padding: 10px;
   margin: 7px;
