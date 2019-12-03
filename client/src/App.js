@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/react-recipe" component={Landing}/>
+          <Route exact path="/" component={Landing}/>
         </Switch>
       </Router>
     </div>
