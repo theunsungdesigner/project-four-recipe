@@ -38,6 +38,10 @@ button {
   margin: 7px;
 }
 
+h1 {
+  font-family: sans-serif;
+}
+
 input.notepad-input{
   
   margin: 14px 0 8px 0;
