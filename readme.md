@@ -26,7 +26,7 @@ This is the conceptual UI flow for the full application
 
  This is the conceptual design for the full application
  ================================================================================
- <img src="" width="350" />
+ <img src="https://github.com/theunsungdesigner/project-four-recipe/blob/master/images/ER%20Diagram%20React%20Recipe.png" width="350" />
 
 
 ## Project Boards 
