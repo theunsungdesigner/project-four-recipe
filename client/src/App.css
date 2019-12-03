@@ -22,6 +22,9 @@
 .App-link {
   color: #61dafb;
 }
+.apiForm {
+  padding: 20px;
+}
 
 .card {
   min-height: 180px;
@@ -31,6 +34,13 @@
 button {
   background: #21d7e7;
   color: white;
+  padding: 10px;
+  margin: 7px;
+}
+
+input.notepad-input{
+  
+  margin: 14px 0 8px 0;
 }
 @keyframes App-logo-spin {
   from {

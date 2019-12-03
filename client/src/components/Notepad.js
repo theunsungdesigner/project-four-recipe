@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { resetWarningCache } from 'prop-types';
+import * as M from 'materialize-css';
 
 
 
@@ -41,6 +42,7 @@ export default class Notepad extends Component {
       recipeName: newNotes.recipeName,
       recipeNotes: newNotes.recipeNotes
     }).then(res => {
+      M.toast({html: 'Recipe Note Saved'})
       console.log(res)
       this.setState({
         newNotes: {
@@ -62,7 +64,7 @@ export default class Notepad extends Component {
             type="text"
             name="recipeName"
             maxLength="40"
-            placeholder=" recipe-name"
+            placeholder="Note Title"
             value={this.state.recipeName}
             onChange={this.handleInputChange}
           />
@@ -86,7 +88,7 @@ export default class Notepad extends Component {
                 <h3>{notepadList.name}</h3>
 
               </div> */}
-          <button type="primary" onChange={this.handleInputChange}>Submit</button>
+          <button type="primary" onChange={this.handleInputChange}>Submit a personal note</button>
         </form>
 
 

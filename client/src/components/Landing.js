@@ -62,7 +62,7 @@ export default class Landing extends Component {
     axios.post('api/singleRecipe',this.state.selectedRecipe) 
    .then(res =>{ 
      // toast success with name
-     M.toast({html: 'I am a toast!'})
+     M.toast({html: 'Recipe Saved'})
    })
    .catch(err => { 
      // toast err
@@ -130,19 +130,20 @@ export default class Landing extends Component {
         <div>
           <h1> REACT RECIPES </h1>
         </div>
-        <button onClick={this.fetchApi}>Submit Search</button>
+        
 
         <div>
-          <form onSubmit={this.fetchApi}>
+          <form className="apiForm valign" onSubmit={this.fetchApi}>
             <input
               type="text"
               name="input"
-              placeholder="search here"
+              placeholder= "Recipe search here"
               value={this.state.input}
               onChange={this.handleChange}
             />
           </form>
         </div>
+        <button onClick={this.fetchApi}>Recipe Search</button>
 
         <Notepad />
         <Image />
@@ -185,27 +186,6 @@ export default class Landing extends Component {
             </div>
           </div>
         </div>
-
-        {/* <div className="carousel">
-          {this.state.recipeList.map((recipe, index) => {
-            return (
-              <div key={index}>
-                <h4 onClick={this.selectRecipe} data-index={index}>
-                  {recipe.title}
-                </h4>
-
-                <button
-                  className="saveRecipe"
-                  data-index={index}
-                  onClick={this.saveRecipe}
-                >
-                  {recipe.saved == true ? "remove" : "save"} recipe
-
-                </button>
-              </div>
-            );
-          })}
-        </div> */}
         {this.renderModal()}
       </div>
     );
