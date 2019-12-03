@@ -96,7 +96,8 @@ export default class Landing extends Component {
       if (index === parseInt(id)) {
         this.state.recipeList[index].saved = !this.state.recipeList[index]
           .saved;
-        return recipe;
+        this.forceUpdate()
+        // return recipe;
       }
     });
     console.groupCollapsed("saved");
@@ -107,6 +108,7 @@ export default class Landing extends Component {
 
   selectRecipe = e => {
     const id = e.target.getAttribute("data-index");
+    
     this.state.recipeList.find((recipe, index) => {
       if (index === parseInt(id)) {
         console.log(recipe);
@@ -119,29 +121,17 @@ export default class Landing extends Component {
   };
 
   componentDidMount() {
-    // axios.get("/api/singleRecipe").then(res => {
-    //   console.log(res.data);
-    //   this.setState({
-    //     singleRecipe: res.data
-    //   });
-    // });
-    // axios.get("/api/notepad").then(res => {
-    //   console.log(res.data);
-    //   this.setState({
-    //     notepad: res.data
-    //   });
-    // });
+  
   }
 
   render() {
     return (
       <div>
-        
-          <div>
-            <h1> REACT RECIPES </h1>
-          </div>
-          <button onClick={this.fetchApi}>Submit Search</button>
-       
+        <div>
+          <h1> REACT RECIPES </h1>
+        </div>
+        <button onClick={this.fetchApi}>Submit Search</button>
+
         <div>
           <form onSubmit={this.fetchApi}>
             <input
@@ -157,7 +147,46 @@ export default class Landing extends Component {
         <Notepad />
         <Image />
 
-        <div className="carousel">
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <div class="row">
+              {/* Loop  */}
+              {this.state.recipeList.map((recipe, index) => {
+                return (
+                  <div key={index} class="col s12 m6 l4 xl3">
+                  <div class="card">
+                    {/* <div class="card-image" onClick={this.selectRecipe}
+                      data-index={index}>
+                    <img src={recipe.thumbnail || ""} />
+                    { recipe.saved ? <p className="badge">saved</p> : null }
+                    <span
+                      class="card-title"
+                    >
+                      {recipe.title}
+                    </span>
+                  </div> */}
+                    { recipe.saved ? <p className="badge">saved</p> : null }
+                    <h2
+                      class="card-title"
+                      onClick={this.selectRecipe}
+                      data-index={index}
+                    >
+                      {recipe.title}
+                    </h2>
+                    <div class="card-action">
+                      <button data-index={index} onClick={this.saveRecipe}>
+                        {recipe.saved == true ? "remove" : "save"} recipe
+                      </button>
+                    </div>
+                  </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="carousel">
           {this.state.recipeList.map((recipe, index) => {
             return (
               <div key={index}>
@@ -171,12 +200,12 @@ export default class Landing extends Component {
                   onClick={this.saveRecipe}
                 >
                   {recipe.saved == true ? "remove" : "save"} recipe
-                  {/* axios call here to select saved recipe to post notepadID and imageID */}
+
                 </button>
               </div>
             );
           })}
-        </div>
+        </div> */}
         {this.renderModal()}
       </div>
     );
