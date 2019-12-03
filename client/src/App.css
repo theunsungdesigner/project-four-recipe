@@ -42,6 +42,10 @@ h1 {
   font-family: sans-serif;
 }
 
+h3 {
+  font-style: italic;
+}
+
 input.notepad-input{
   
   margin: 14px 0 8px 0;
