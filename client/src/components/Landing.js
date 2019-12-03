@@ -56,6 +56,9 @@ export default class Landing extends Component {
   handleClose = () => {
     this.setState({ isModalOpen: false });
   };
+  cancelRecipe = () => { 
+    document.getElementById("cancel-recipe-form").reset();
+  }
 
   databasePost =(e)=>{
     // e.preventDefault()
@@ -133,8 +136,8 @@ export default class Landing extends Component {
         
 
         <div>
-          <form className="apiForm valign" onSubmit={this.fetchApi}>
-            <input
+          <form className="apiForm " onSubmit={this.fetchApi}>
+            <input id ="cancel-recipe-form"
               type="text"
               name="input"
               placeholder= "Recipe search here"
