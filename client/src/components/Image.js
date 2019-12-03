@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import * as M from 'materialize-css';
 
 export default class Image extends Component {
   state = {
@@ -28,6 +29,7 @@ export default class Image extends Component {
         url: this.state.imageUrl
       })
       .then(res => {
+        M.toast({html: 'Image Saved'})
         this.setState({
           file: {
             url: " "
