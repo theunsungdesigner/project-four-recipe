@@ -8,7 +8,7 @@ function getSingleRecipeId(req, res) {
   if (
     singleRecipeId === "" ||
     singleRecipeId === undefined ||
-    singleRecipeId === null
+    singleRecipeId === null 
   ) {
     const message = `singlerecipeId parameter missing from URL. Please check parameters and try again`;
     console.log(message);

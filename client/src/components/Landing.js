@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Redirect, Link } from "react-router-dom";
+// import { Redirect, Link } from "react-router-dom";
 import Notepad from "./Notepad";
 import Image from "./Image"
 import SingleRecipe from "./SingleRecipe";
@@ -64,7 +64,7 @@ export default class Landing extends Component {
 
   databasePost =(e)=>{
     // e.preventDefault()
-    axios.post('api/singleRecipe',this.state.selectedRecipe) 
+    axios.post('api/singleRecipe/',this.state.selectedRecipe) 
    .then(res =>{ 
      // toast success with name
      M.toast({html: 'Recipe Saved'})

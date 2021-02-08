@@ -1,66 +1,55 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { resetWarningCache } from 'prop-types';
-import * as M from 'materialize-css';
-
-
+import React, { Component } from "react";
+import axios from "axios";
+import * as M from "materialize-css";
 
 export default class Notepad extends Component {
   state = {
     notes: [],
     newNotes: {
-      recipeName: '',
-      recipeNotes: '',
-      url: '',
-      imageId: '',
-      recipeId: ''
+      recipeName: "",
+      recipeNotes: "",
+      url: "",
+      imageId: "",
+      recipeId: "",
+    },
+  };
 
-    }
-  }
-
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     const newNotepad = { ...this.state.newNotes };
     newNotepad[e.target.name] = e.target.value;
     this.setState({ newNotes: newNotepad });
   };
   componentDidMount() {
-    axios.get("/api/notepad").then(res => {
+    axios.get("/api/notepad").then((res) => {
       console.log(res.data);
-
-      // this.setState({
-      //   recipeName: res.data,
-      //   recipeNotes: res.data,
-      //   recipeId: ''
-      // });
     });
   }
 
   bttnClick = (e) => {
-    e.preventDefault()
-    const { newNotes } = this.state
-    axios.post('/api/notepad', {
-      recipeName: newNotes.recipeName,
-      recipeNotes: newNotes.recipeNotes
-    }).then(res => {
-      M.toast({html: 'Recipe Note Saved'})
-      console.log(res)
-      this.setState({
-        newNotes: {
-          recipeName: '',
-          recipeNotes: ''
-        }
+    e.preventDefault();
+    const { newNotes } = this.state;
+    axios
+      .post("/api/notepad", {
+        recipeName: newNotes.recipeName,
+        recipeNotes: newNotes.recipeNotes,
       })
-     
-    })
-
-  }
+      .then((res) => {
+        M.toast({ html: "Recipe Note Saved" });
+        console.log(res);
+        this.setState({
+          newNotes: {
+            recipeName: "",
+            recipeNotes: "",
+          },
+        });
+      });
+  };
   render() {
     return (
-      
       <div className="input-field">
-
         <form onSubmit={this.bttnClick}>
-          <input className = "notepad-input"
+          <input
+            className="notepad-input"
             type="text"
             name="recipeName"
             maxLength="40"
@@ -68,7 +57,8 @@ export default class Notepad extends Component {
             value={this.state.recipeName}
             onChange={this.handleInputChange}
           />
-          <input className ="notepad-input"
+          <input
+            className="notepad-input"
             type="text"
             name="recipeNotes"
             maxLength="250"
@@ -76,27 +66,11 @@ export default class Notepad extends Component {
             value={this.state.recipeNotes}
             onChange={this.handleInputChange}
           />
-
-          
-          
-
-          {/* <div key={notepadList.id} onClick={() => {
-                this.bttnClick(notepadList)
-              }}
-              >
-
-                <h3>{notepadList.name}</h3>
-
-              </div> */}
-          <button type="primary" onChange={this.handleInputChange}>Submit a personal note</button>
+          <button type="primary" onChange={this.handleInputChange}>
+            Submit a personal note
+          </button>
         </form>
-
-
-
-
       </div>
-
-
-    )
+    );
   }
 }
